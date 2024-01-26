@@ -72,7 +72,7 @@ if __name__ == "__main__":
     print(
         "if you are running this on anything other than an A6000, you will get less than optimum speeds. The configs have only been tuned for A6000"
     )
-    M, N, K = 14336 * 2 * 8, 16, 4096
+    M, N, K = 14336 * 2 * 8, 128, 4096
     x = torch.randn(N, K, dtype=torch.float16, device="cuda") * 0.1
     w = torch.randn(M, K, dtype=torch.float16, device="cuda") * 0.05
 
@@ -109,7 +109,10 @@ if __name__ == "__main__":
 
     end = time.perf_counter()
 
-    print(f"Tuna Time: {(end - start) / N_RUNS * 1000} ms")
+    print(f"- Tuna Time: {(end - start) / N_RUNS * 1000} ms")
+
+    for i in range(100):
+        torch.matmul(x, w.t())
 
     torch.cuda.synchronize()
 
@@ -122,4 +125,4 @@ if __name__ == "__main__":
 
     end = time.perf_counter()
 
-    print(f"Baseline Time: {(end - start) / N_RUNS * 1000} ms")
+    print(f"- cuBLAS Time: {(end - start) / N_RUNS * 1000} ms")
