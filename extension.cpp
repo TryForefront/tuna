@@ -19,7 +19,7 @@
 #include <ATen/cuda/CUDAContext.h>
 #include <cuda_runtime.h>
 
-void wrapper(void *q, void *x, void *c, void *s, void *o, int m, int n, int k);
+void wrapper(void *q, void *x, void *c, void *s, void *o, int m, int n, int k, cudaStream_t stream);
 
 void matmul(torch::Tensor x, torch::Tensor q, torch::Tensor s, torch::Tensor c, torch::Tensor o, int m, int n, int k)
 {
@@ -31,7 +31,8 @@ void matmul(torch::Tensor x, torch::Tensor q, torch::Tensor s, torch::Tensor c, 
             o.data_ptr(),
             m,
             n,
-            k);
+            k,
+            at::cuda::getCurrentCUDAStream(x.get_device()));
 }
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m)
