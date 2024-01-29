@@ -87,7 +87,7 @@ if __name__ == "__main__":
     print(baseline)
     print(out)
 
-    N_RUNS = 100
+    N_RUNS = 1000
 
     torch.cuda.synchronize()
 

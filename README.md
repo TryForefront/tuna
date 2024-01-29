@@ -18,3 +18,9 @@ All with batch size 16, on RTX A6000, and average of 1000 runs with 100 runs for
 | Mixtral MLP Output (combined all experts)     | 0.6302669756114483  | 1.3500527553260326   |
 | QKV Projection                                | 0.05724561959505081 | 0.08708584681153297  |
 | Attention Out Projection                      | 0.05881141871213913 | 0.053854379802942276 |
+
+# Future Improvements
+
+- More tuning for more problem sizes and more GPUs
+- Better tuning algorithm than evolutionary. Probably a hierarchical grid tuner.
+- Optimize the global to shared loading, perhaps with some different cache policies when data isn't reused.
