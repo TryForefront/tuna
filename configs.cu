@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2024 Forefront Industries, Ltd.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 #define TRANSFORM_N true
 #define TRANSFORM_T false
 #define LAYOUT_C true
@@ -69,7 +53,7 @@ struct KernelConfig
     static constexpr int deqBlockCount = 1;
 };
 
-constexpr KernelConfig attn_out_1 = {
+constexpr KernelConfig gemm_4096_4096_1 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -95,7 +79,7 @@ constexpr KernelConfig attn_out_1 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig qkv_proj_1 = {
+constexpr KernelConfig gemm_6144_4096_1 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -121,7 +105,7 @@ constexpr KernelConfig qkv_proj_1 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig mistral_mlp_in_1 = {
+constexpr KernelConfig gemm_28672_4096_1 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -147,7 +131,7 @@ constexpr KernelConfig mistral_mlp_in_1 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig mixtral_mlp_in_1 = {
+constexpr KernelConfig gemm_229376_4096_1 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -173,7 +157,7 @@ constexpr KernelConfig mixtral_mlp_in_1 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 0};
 
-constexpr KernelConfig mistral_mlp_out_1 = {
+constexpr KernelConfig gemm_4096_14336_1 = {
     /* tileM */ 512,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -199,7 +183,7 @@ constexpr KernelConfig mistral_mlp_out_1 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
 
-constexpr KernelConfig mixtral_mlp_out_1 = {
+constexpr KernelConfig gemm_32768_14336_1 = {
     /* tileM */ 384,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -225,7 +209,7 @@ constexpr KernelConfig mixtral_mlp_out_1 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig attn_out_16 = {
+constexpr KernelConfig gemm_4096_4096_16 = {
     /* tileM */ 512,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -251,7 +235,7 @@ constexpr KernelConfig attn_out_16 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
 
-constexpr KernelConfig qkv_proj_16 = {
+constexpr KernelConfig gemm_6144_4096_16 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -277,7 +261,7 @@ constexpr KernelConfig qkv_proj_16 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig mistral_mlp_in_16 = {
+constexpr KernelConfig gemm_28672_4096_16 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -303,7 +287,7 @@ constexpr KernelConfig mistral_mlp_in_16 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 0};
 
-constexpr KernelConfig mixtral_mlp_in_16 = {
+constexpr KernelConfig gemm_229376_4096_16 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -329,7 +313,7 @@ constexpr KernelConfig mixtral_mlp_in_16 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 0};
 
-constexpr KernelConfig mistral_mlp_out_16 = {
+constexpr KernelConfig gemm_4096_14336_16 = {
     /* tileM */ 512,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -355,7 +339,7 @@ constexpr KernelConfig mistral_mlp_out_16 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
 
-constexpr KernelConfig mixtral_mlp_out_16 = {
+constexpr KernelConfig gemm_32768_14336_16 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -381,7 +365,7 @@ constexpr KernelConfig mixtral_mlp_out_16 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig attn_out_32 = {
+constexpr KernelConfig gemm_4096_4096_32 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -407,7 +391,7 @@ constexpr KernelConfig attn_out_32 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 0};
 
-constexpr KernelConfig qkv_proj_32 = {
+constexpr KernelConfig gemm_6144_4096_32 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -433,7 +417,7 @@ constexpr KernelConfig qkv_proj_32 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig mistral_mlp_in_32 = {
+constexpr KernelConfig gemm_28672_4096_32 = {
     /* tileM */ 384,
     /* tileN */ 64,
     /* tileK */ 32,
@@ -459,7 +443,7 @@ constexpr KernelConfig mistral_mlp_in_32 = {
     /* pipelineStrat */ 4,
     /* paddingC */ 0};
 
-constexpr KernelConfig mixtral_mlp_in_32 = {
+constexpr KernelConfig gemm_229376_4096_32 = {
     /* tileM */ 512,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -485,7 +469,7 @@ constexpr KernelConfig mixtral_mlp_in_32 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 0};
 
-constexpr KernelConfig mistral_mlp_out_32 = {
+constexpr KernelConfig gemm_4096_14336_32 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -511,7 +495,7 @@ constexpr KernelConfig mistral_mlp_out_32 = {
     /* pipelineStrat */ 3,
     /* paddingC */ 2};
 
-constexpr KernelConfig mixtral_mlp_out_32 = {
+constexpr KernelConfig gemm_32768_14336_32 = {
     /* tileM */ 512,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -537,7 +521,7 @@ constexpr KernelConfig mixtral_mlp_out_32 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 0};
 
-constexpr KernelConfig attn_out_64 = {
+constexpr KernelConfig gemm_4096_4096_64 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -563,7 +547,7 @@ constexpr KernelConfig attn_out_64 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
 
-constexpr KernelConfig qkv_proj_64 = {
+constexpr KernelConfig gemm_6144_4096_64 = {
     /* tileM */ 384,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -589,7 +573,7 @@ constexpr KernelConfig qkv_proj_64 = {
     /* pipelineStrat */ 4,
     /* paddingC */ 0};
 
-constexpr KernelConfig mistral_mlp_in_64 = {
+constexpr KernelConfig gemm_28672_4096_64 = {
     /* tileM */ 384,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -615,7 +599,7 @@ constexpr KernelConfig mistral_mlp_in_64 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
 
-constexpr KernelConfig mixtral_mlp_in_64 = {
+constexpr KernelConfig gemm_229376_4096_64 = {
     /* tileM */ 512,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -641,7 +625,7 @@ constexpr KernelConfig mixtral_mlp_in_64 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig mistral_mlp_out_64 = {
+constexpr KernelConfig gemm_4096_14336_64 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -667,7 +651,7 @@ constexpr KernelConfig mistral_mlp_out_64 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 0};
 
-constexpr KernelConfig mixtral_mlp_out_64 = {
+constexpr KernelConfig gemm_32768_14336_64 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -693,7 +677,7 @@ constexpr KernelConfig mixtral_mlp_out_64 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig attn_out_128 = {
+constexpr KernelConfig gemm_4096_4096_128 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -719,7 +703,7 @@ constexpr KernelConfig attn_out_128 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
 
-constexpr KernelConfig qkv_proj_128 = {
+constexpr KernelConfig gemm_6144_4096_128 = {
     /* tileM */ 768,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -745,7 +729,7 @@ constexpr KernelConfig qkv_proj_128 = {
     /* pipelineStrat */ 3,
     /* paddingC */ 2};
 
-constexpr KernelConfig mistral_mlp_in_128 = {
+constexpr KernelConfig gemm_28672_4096_128 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -771,7 +755,7 @@ constexpr KernelConfig mistral_mlp_in_128 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig mixtral_mlp_in_128 = {
+constexpr KernelConfig gemm_229376_4096_128 = {
     /* tileM */ 512,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -797,7 +781,7 @@ constexpr KernelConfig mixtral_mlp_in_128 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 0};
 
-constexpr KernelConfig mistral_mlp_out_128 = {
+constexpr KernelConfig gemm_4096_14336_128 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -823,7 +807,7 @@ constexpr KernelConfig mistral_mlp_out_128 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 0};
 
-constexpr KernelConfig mixtral_mlp_out_128 = {
+constexpr KernelConfig gemm_32768_14336_128 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -849,7 +833,7 @@ constexpr KernelConfig mixtral_mlp_out_128 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 0};
 
-constexpr KernelConfig attn_out_256 = {
+constexpr KernelConfig gemm_4096_4096_256 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -875,7 +859,7 @@ constexpr KernelConfig attn_out_256 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig qkv_proj_256 = {
+constexpr KernelConfig gemm_6144_4096_256 = {
     /* tileM */ 384,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -901,7 +885,7 @@ constexpr KernelConfig qkv_proj_256 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
 
-constexpr KernelConfig mistral_mlp_in_256 = {
+constexpr KernelConfig gemm_28672_4096_256 = {
     /* tileM */ 256,
     /* tileN */ 64,
     /* tileK */ 32,
@@ -927,7 +911,7 @@ constexpr KernelConfig mistral_mlp_in_256 = {
     /* pipelineStrat */ 4,
     /* paddingC */ 2};
 
-constexpr KernelConfig mixtral_mlp_in_256 = {
+constexpr KernelConfig gemm_229376_4096_256 = {
     /* tileM */ 256,
     /* tileN */ 64,
     /* tileK */ 32,
@@ -953,7 +937,7 @@ constexpr KernelConfig mixtral_mlp_in_256 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig mistral_mlp_out_256 = {
+constexpr KernelConfig gemm_4096_14336_256 = {
     /* tileM */ 256,
     /* tileN */ 64,
     /* tileK */ 32,
@@ -979,7 +963,7 @@ constexpr KernelConfig mistral_mlp_out_256 = {
     /* pipelineStrat */ 4,
     /* paddingC */ 2};
 
-constexpr KernelConfig mixtral_mlp_out_256 = {
+constexpr KernelConfig gemm_32768_14336_256 = {
     /* tileM */ 256,
     /* tileN */ 128,
     /* tileK */ 32,
@@ -1005,7 +989,7 @@ constexpr KernelConfig mixtral_mlp_out_256 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
 
-constexpr KernelConfig attn_out_512 = {
+constexpr KernelConfig gemm_4096_4096_512 = {
     /* tileM */ 256,
     /* tileN */ 64,
     /* tileK */ 32,
@@ -1031,7 +1015,7 @@ constexpr KernelConfig attn_out_512 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
 
-constexpr KernelConfig qkv_proj_512 = {
+constexpr KernelConfig gemm_6144_4096_512 = {
     /* tileM */ 256,
     /* tileN */ 64,
     /* tileK */ 32,
@@ -1057,7 +1041,7 @@ constexpr KernelConfig qkv_proj_512 = {
     /* pipelineStrat */ 1,
     /* paddingC */ 2};
 
-constexpr KernelConfig mistral_mlp_in_512 = {
+constexpr KernelConfig gemm_28672_4096_512 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -1083,7 +1067,7 @@ constexpr KernelConfig mistral_mlp_in_512 = {
     /* pipelineStrat */ 2,
     /* paddingC */ 0};
 
-constexpr KernelConfig mixtral_mlp_in_512 = {
+constexpr KernelConfig gemm_229376_4096_512 = {
     /* tileM */ 256,
     /* tileN */ 32,
     /* tileK */ 32,
@@ -1106,5 +1090,1097 @@ constexpr KernelConfig mixtral_mlp_in_512 = {
     /* stages */ 4,
     /* absMaxPerBlock */ 256,
     /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_4096_14336_512 = {
+    /* tileM */ 256,
+    /* tileN */ 128,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 14336,
+    /* m */ 4096,
+    /* splitK */ 2,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 16,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 14336,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_32768_14336_512 = {
+    /* tileM */ 256,
+    /* tileN */ 128,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 14336,
+    /* m */ 32768,
+    /* splitK */ 2,
+    /* warpCountM */ 4,
+    /* warpCountN */ 2,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 8,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 14336,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 3,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_4096_4096_1024 = {
+    /* tileM */ 256,
+    /* tileN */ 128,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 4096,
+    /* m */ 4096,
+    /* splitK */ 1,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 16,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 128,
+    /* deqBlockSize */ 4096,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_6144_4096_1024 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 4096,
+    /* m */ 6144,
+    /* splitK */ 1,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 4096,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_28672_4096_1024 = {
+    /* tileM */ 256,
+    /* tileN */ 64,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 4096,
+    /* m */ 28672,
+    /* splitK */ 1,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 8,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 4096,
+    /* stages */ 2,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_2560_2560_1 = {
+    /* tileM */ 512,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 2560,
+    /* m */ 2560,
+    /* splitK */ 20,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 2560,
+    /* stages */ 8,
+    /* absMaxPerBlock */ 512,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 3,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_7680_2560_1 = {
+    /* tileM */ 384,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 2560,
+    /* m */ 7680,
+    /* splitK */ 4,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 3,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 128,
+    /* deqBlockSize */ 2560,
+    /* stages */ 8,
+    /* absMaxPerBlock */ 384,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_10240_2560_1 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 2560,
+    /* m */ 10240,
+    /* splitK */ 10,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 2560,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_2560_10240_1 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 10240,
+    /* m */ 2560,
+    /* splitK */ 24,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 10240,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_8192_8192_1 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 2,
+    /* patchN */ 1,
+    /* k */ 8192,
+    /* m */ 8192,
+    /* splitK */ 24,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 8192,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_10240_8192_1 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 8192,
+    /* m */ 10240,
+    /* splitK */ 4,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 8192,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_57344_8192_1 = {
+    /* tileM */ 512,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 8192,
+    /* m */ 57344,
+    /* splitK */ 6,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 8,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 8192,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 512,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_8192_28672_1 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 28672,
+    /* m */ 8192,
+    /* splitK */ 20,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 28672,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_2560_2560_16 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 2560,
+    /* m */ 2560,
+    /* splitK */ 4,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 2560,
+    /* stages */ 12,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 5,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_7680_2560_16 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 2560,
+    /* m */ 7680,
+    /* splitK */ 4,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 2560,
+    /* stages */ 2,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_10240_2560_16 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 2560,
+    /* m */ 10240,
+    /* splitK */ 2,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 2560,
+    /* stages */ 10,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 3,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_2560_10240_16 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 10240,
+    /* m */ 2560,
+    /* splitK */ 16,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 10240,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_8192_8192_16 = {
+    /* tileM */ 512,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 8192,
+    /* m */ 8192,
+    /* splitK */ 4,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 8192,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 512,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_10240_8192_16 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 8192,
+    /* m */ 10240,
+    /* splitK */ 6,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 8192,
+    /* stages */ 2,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_57344_8192_16 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 8192,
+    /* m */ 57344,
+    /* splitK */ 4,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 8192,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 4,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_8192_28672_16 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 28672,
+    /* m */ 8192,
+    /* splitK */ 12,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 28672,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_2560_2560_32 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 2560,
+    /* m */ 2560,
+    /* splitK */ 8,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 128,
+    /* deqBlockSize */ 2560,
+    /* stages */ 10,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_7680_2560_32 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 2560,
+    /* m */ 7680,
+    /* splitK */ 1,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 2560,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_10240_2560_32 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 2560,
+    /* m */ 10240,
+    /* splitK */ 4,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 2560,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_2560_10240_32 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 10240,
+    /* m */ 2560,
+    /* splitK */ 12,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 10240,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 4,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_8192_8192_32 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 1,
+    /* patchN */ 2,
+    /* k */ 8192,
+    /* m */ 8192,
+    /* splitK */ 4,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 8192,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_10240_8192_32 = {
+    /* tileM */ 384,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 8192,
+    /* m */ 10240,
+    /* splitK */ 6,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 6,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 8192,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 384,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_57344_8192_32 = {
+    /* tileM */ 768,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 8192,
+    /* m */ 57344,
+    /* splitK */ 1,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 6,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 128,
+    /* deqBlockSize */ 8192,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 768,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_8192_28672_32 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 28672,
+    /* m */ 8192,
+    /* splitK */ 10,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 28672,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_2560_2560_64 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 2560,
+    /* m */ 2560,
+    /* splitK */ 8,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 2560,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_7680_2560_64 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 2560,
+    /* m */ 7680,
+    /* splitK */ 1,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 128,
+    /* deqBlockSize */ 2560,
+    /* stages */ 12,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_10240_2560_64 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 2560,
+    /* m */ 10240,
+    /* splitK */ 1,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 2560,
+    /* stages */ 8,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_2560_10240_64 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 10240,
+    /* m */ 2560,
+    /* splitK */ 8,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 10240,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_8192_8192_64 = {
+    /* tileM */ 256,
+    /* tileN */ 64,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 8192,
+    /* m */ 8192,
+    /* splitK */ 2,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 8,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 8192,
+    /* stages */ 8,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_10240_8192_64 = {
+    /* tileM */ 256,
+    /* tileN */ 64,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 8192,
+    /* m */ 10240,
+    /* splitK */ 2,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 8,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 8192,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_57344_8192_64 = {
+    /* tileM */ 512,
+    /* tileN */ 64,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 1,
+    /* k */ 8192,
+    /* m */ 57344,
+    /* splitK */ 1,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 8,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 8192,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 512,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_8192_28672_64 = {
+    /* tileM */ 256,
+    /* tileN */ 64,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 28672,
+    /* m */ 8192,
+    /* splitK */ 4,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 8,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 28672,
+    /* stages */ 10,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_2560_2560_128 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 2560,
+    /* m */ 2560,
+    /* splitK */ 8,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 2560,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 4,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_7680_2560_128 = {
+    /* tileM */ 256,
+    /* tileN */ 64,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 2560,
+    /* m */ 7680,
+    /* splitK */ 1,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 8,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 2560,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 2,
+    /* paddingC */ 2};
+
+constexpr KernelConfig gemm_10240_2560_128 = {
+    /* tileM */ 256,
+    /* tileN */ 64,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 2560,
+    /* m */ 10240,
+    /* splitK */ 1,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 8,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 128,
+    /* deqBlockSize */ 2560,
+    /* stages */ 4,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 4,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_2560_10240_128 = {
+    /* tileM */ 256,
+    /* tileN */ 64,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 10240,
+    /* m */ 2560,
+    /* splitK */ 4,
+    /* warpCountM */ 8,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 2,
+    /* warpMmaCountN */ 8,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 64,
+    /* deqBlockSize */ 10240,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 256,
+    /* pipelineStrat */ 1,
+    /* paddingC */ 0};
+
+constexpr KernelConfig gemm_8192_8192_128 = {
+    /* tileM */ 256,
+    /* tileN */ 32,
+    /* tileK */ 32,
+    /* patchM */ 4,
+    /* patchN */ 2,
+    /* k */ 8192,
+    /* m */ 8192,
+    /* splitK */ 1,
+    /* warpCountM */ 4,
+    /* warpCountN */ 1,
+    /* mmaSizeM */ 16,
+    /* mmaSizeN */ 8,
+    /* mmaSizeK */ 16,
+    /* warpMmaCountM */ 4,
+    /* warpMmaCountN */ 4,
+    /* warpMmaCountK */ 2,
+    /* contiguousBytesA */ -1,
+    /* contiguousBytesB */ 32,
+    /* deqBlockSize */ 8192,
+    /* stages */ 6,
+    /* absMaxPerBlock */ 256,
+    /* threadsPerBlock */ 128,
     /* pipelineStrat */ 2,
     /* paddingC */ 2};
