@@ -2987,11 +2987,11 @@ constexpr unsigned int requiredSmem(const KernelConfig config)
         const int n_ = div_ru(n, config.tileN * config.patchN);                                                               \
         dim3 blocks_per_grid(config.patchN *config.patchM, n_ *m_, config.splitK);                                            \
         constexpr dim3 threads_per_block(config.threadsPerBlock);                                                             \
-        kernelFunc<<<blocks_per_grid, threads_per_block, smem>>>(Q_ptr, X_ptr, C_ptr, S_ptr, O_ptr, n);                       \
+        kernelFunc<<<blocks_per_grid, threads_per_block, smem, stream>>>(Q_ptr, X_ptr, C_ptr, S_ptr, O_ptr, n);               \
         return;                                                                                                               \
     }
 
-void wrapper(void *q, void *x, void *c, void *s, void *o, const int m, const int n, const int k)
+void wrapper(void *q, void *x, void *c, void *s, void *o, const int m, const int n, const int k, cudaStream_t stream)
 {
 
     const uint8_t *Q_ptr = reinterpret_cast<const uint8_t *>(q);
