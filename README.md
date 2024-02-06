@@ -8,23 +8,23 @@ The configs included here are only tuned for an RTX A6000 (not Ada). If you run 
 
 # Small Batch \* Seq Benchmarks
 
-All with batch size 16, on RTX A6000, and average of 1000 runs with 100 runs for warmup.
+All with batch size 16, on RTX A6000, and average of 1000 runs with 100 runs for warmup. These configs are what are currently found in the repo's `param_map.json` and `configs.cu`
 
-| Benchmark                                     | Tuna Time (ms)      | cuBLAS Time (ms)     | Speedup |
-| --------------------------------------------- | ------------------- | -------------------- | ------- |
-| Mistral MLP Input (combined gate and up proj) | 0.17720630019903183 | 0.3694557063281536   | 2.08    |
-| Mixtral MLP Input (combined all experts)      | 1.086780022829771   | 2.690451130270958    | 2.48    |
-| Mistral MLP Output                            | 0.10128284990787506 | 0.17485007271170616  | 1.73    |
-| Mixtral MLP Output (combined all experts)     | 0.6302669756114483  | 1.3500527553260326   | 2.14    |
-| Mi(s\|x)tral QKV Proj                         | 0.05724561959505081 | 0.08708584681153297  | 1.52    |
-| Mi(s\|x)tral Attention Out Proj               | 0.05881141871213913 | 0.053854379802942276 | 0.92    |
-| Llama 70b Attn Out Proj                       | 0.11454912275075912 | 0.24153944104909897  | 2.11    |
-| Llama 70b QKV Proj                            | 0.12170646712183952 | 0.25466201081871986  | 2.09    |
-| Llama 70b MLP Input (combined gate and up)    | 0.6226886250078678  | 1.3868155255913734   | 2.23    |
-| LLama 70b MLP Output                          | 0.30147412419319153 | 0.7220751233398914   | 2.40    |
-| Mixtral Total GEMMs (32 blocks)               | 58.6593291759491    | 133.8062115907669    | 2.28    |
-| Mistral Total GEMMs (32 blocks)               | 12.625478029251099  | 21.92787218093872    | 1.74    |
-| Llama 70b Total GEMMs (80 blocks)             | 92.83346712589264   | 208.4073680639267    | 2.24    |
+| Benchmark                                     | Tuna Time (ms)       | cuBLAS Time (ms)    | Speedup |
+| --------------------------------------------- | -------------------- | ------------------- | ------- |
+| Mistral MLP Input (combined gate and up proj) | 0.16256877034902573  | 0.3670984320342541  | 2.26    |
+| Mixtral MLP Input (combined all experts)      | 1.0869103781878948   | 2.6869438253343105  | 2.47    |
+| Mistral MLP Output                            | 0.10303235054016113  | 0.17698441073298454 | 1.72    |
+| Mixtral MLP Output (combined all experts)     | 0.6412508971989155   | 1.3513591587543488  | 2.11    |
+| Mi(s\|x)tral QKV Proj                         | 0.05689075216650963  | 0.08756674453616142 | 1.54    |
+| Mi(s\|x)tral Attention Out Proj               | 0.048066891729831696 | 0.05451885610818863 | 1.13    |
+| Llama 70b Attn Out Proj                       | 0.1169043518602848   | 0.24606598913669583 | 2.10    |
+| Llama 70b QKV Proj                            | 0.1213807724416256   | 0.25460585579276085 | 2.10    |
+| Llama 70b MLP Input (combined gate and up)    | 0.5466882549226284   | 1.3823552504181862  | 2.53    |
+| LLama 70b MLP Output                          | 0.3022856377065182   | 0.7248534262180328  | 2.40    |
+| Mixtral Total GEMMs (32 blocks)               | 58.65980541706085    | 134.82996714115143  | 2.30    |
+| Mistral Total GEMMs (32 blocks)               | 11.857880473136902   | 23.014922618865967  | 1.94    |
+| Llama 70b Total GEMMs (80 blocks)             | 86.98072135448456    | 208.63044117253     | 2.39    |
 
 # Future Improvements
 
