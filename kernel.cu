@@ -3154,3 +3154,100 @@ void wrapper(void *q, void *x, void *c, void *s, void *o, const int m, const int
     LAUNCH_KERNEL_IF_CONDITION(gemm_57344_8192_2048, 57344, 1025, 128000, 8192)
     LAUNCH_KERNEL_IF_CONDITION(gemm_8192_28672_2048, 8192, 1025, 128000, 28672)
 }
+
+__global__ void dequantize_4bit(
+    const uint8_t *quantizedPtr, //[b, m/8, k/8, 32]
+    const float *absmaxPtr,      //[b * m]
+    const float *codePtr,        // [16]
+    half *outPtr,                //[b, m, k]
+    int m, int k)
+{
+    constexpr int WarpsPerBlock = 8;
+    constexpr int AlignSizeBytes = 8;
+    constexpr int kPerWarp = AlignSizeBytes;
+    constexpr int AbsMaxPerBlock = 8 * WarpsPerBlock;
+    constexpr int CodeSize = 16;
+
+    const Coord3D strides = {m * k / 2, 4 * k, 32}; //[m/8 * k/8 * 32, k/8 * 32, 32]
+
+    const int tid = threadIdx.x;
+    const int wid = tid / 32;
+    const int lid = tid % 32;
+    const int lx = lid / (32 / AlignSizeBytes);
+    const int ly = lid % (32 / AlignSizeBytes);
+
+    const int batchIdx = blockIdx.z;
+    const int mStartBlock = blockIdx.x * 8 * WarpsPerBlock;
+    const int kStartBlock = blockIdx.y * 8 * AlignSizeBytes;
+    const int mStartThread = mStartBlock + wid * 8;
+    const int kStartThread = kStartBlock + lx * 8;
+
+    __shared__ float absMaxSmem[AbsMaxPerBlock];
+    __shared__ float codeSmem[CodeSize];
+    __shared__ uint8_t quantizedSmem[WarpsPerBlock][AlignSizeBytes][32];
+    __shared__ half outSmem[WarpsPerBlock * 8][AlignSizeBytes * 8];
+
+    if (lid < 8)
+    {
+        int mIdx = mStartThread + lid;
+        if (mIdx < m)
+        {
+            absMaxSmem[wid * 8 + lid] = absmaxPtr[batchIdx * m + mIdx];
+        }
+        else
+        {
+            absMaxSmem[wid * 8 + lid] = 0.f;
+        }
+    }
+
+    if (tid < CodeSize)
+    {
+        codeSmem[tid] = codePtr[tid];
+    }
+
+    // __syncthreads();
+    __pipeline_memcpy_async(
+        &quantizedSmem[wid][lx][ly * AlignSizeBytes],
+        &quantizedPtr[batchIdx * strides.x + (mStartThread / 8) * strides.y + (kStartThread / 8) * strides.z + ly * AlignSizeBytes],
+        AlignSizeBytes,
+        0);
+    __pipeline_commit();
+    __pipeline_wait_prior(0);
+    __syncthreads();
+
+#pragma unroll
+    for (int i = 0; i < AlignSizeBytes; i++)
+    {
+        uint8_t packed = quantizedSmem[wid][i][lid];
+        float values[2];
+        float absmax = absMaxSmem[wid * 8 + lid / 4];
+        // float absmax = absMaxSmem[0]; //FIXME:
+        values[0] = codeSmem[packed >> 4 & 0b00001111] * absmax;
+        values[1] = codeSmem[packed & 0b00001111] * absmax;
+        outSmem[wid * 8 + lid / 4][i * 8 + (lid % 4) * 2 + 0] = (half)values[0];
+        outSmem[wid * 8 + lid / 4][i * 8 + (lid % 4) * 2 + 1] = (half)values[1];
+    }
+    __syncthreads();
+
+#pragma unroll
+    for (int i = 0; i < 8; i++)
+    {
+#pragma unroll
+        for (int j = 0; j < AlignSizeBytes / 4; j++)
+        {
+            outPtr[batchIdx * m * k + (mStartBlock + wid * 8 + i) * k + (kStartBlock + j * 32 + lid)] = outSmem[wid * 8 + i][j * 32 + lid];
+        }
+    }
+}
+
+void dequantize_wrapper(void *q, void *a, void *c, void *o, const int m, const int k, cudaStream_t stream)
+{
+    const uint8_t *Q_ptr = reinterpret_cast<const uint8_t *>(q);
+    const float *A_ptr = reinterpret_cast<const float *>(a);
+    const float *C_ptr = reinterpret_cast<const float *>(c);
+    half *O_ptr = reinterpret_cast<half *>(o);
+
+    dim3 blocks_per_grid(div_ru(m / 8, 8), div_ru(k / 8, 8), 1);
+    dim3 threads_per_block(8 * 32);
+    dequantize_4bit<<<blocks_per_grid, threads_per_block, 0, stream>>>(Q_ptr, A_ptr, C_ptr, O_ptr, m, k);
+}
