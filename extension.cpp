@@ -21,6 +21,8 @@
 
 void wrapper(void *q, void *x, void *c, void *s, void *o, int m, int n, int k, cudaStream_t stream);
 
+void dequantize_wrapper(void *q, void *a, void *c, void *o, const int m, const int k, cudaStream_t stream);
+
 void matmul(torch::Tensor x, torch::Tensor q, torch::Tensor s, torch::Tensor c, torch::Tensor o, int m, int n, int k)
 {
 
@@ -35,7 +37,19 @@ void matmul(torch::Tensor x, torch::Tensor q, torch::Tensor s, torch::Tensor c, 
             at::cuda::getCurrentCUDAStream(x.get_device()));
 }
 
+void dequant(torch::Tensor q, torch::Tensor absmax, torch::Tensor codebook, torch::Tensor o, int m, int k)
+{
+    dequantize_wrapper(q.data_ptr(),
+                       absmax.data_ptr(),
+                       codebook.data_ptr(),
+                       o.data_ptr(),
+                       m,
+                       k,
+                       at::cuda::getCurrentCUDAStream(q.get_device()));
+}
+
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, m)
 {
     m.def("matmul", &matmul, "FP16xFP4 Matrix Multiplication Kernel");
+    m.def("dequant", &dequant, "Dequantization Kernel");
 }
